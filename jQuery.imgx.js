@@ -35,8 +35,8 @@
         
             var src;
 
-            if (x2) src = $(this).attr('src').replace(/\.(gif|jpg|jpeg|png|webp)$/,'@2x.$1');
-            if (x3) src = $(this).attr('src').replace(/\.(gif|jpg|jpeg|png|webp)$/,'@3x.$1');
+            if (x2) src = $(this).attr('src').replace(/\.(gif|jpg|jpeg|png|webp)$/i,'@2x.$1');
+            if (x3) src = $(this).attr('src').replace(/\.(gif|jpg|jpeg|png|webp)$/i,'@3x.$1');
                           $(this).attr('src', src);
         });      
     };
