@@ -1,6 +1,7 @@
-// jQuery extension for serving hi-res images
-// Source: github.com/ByNathan/jQuery.imgx
-// Version: 1.0.2
+// Plugin: jQuery.imgx
+// Source: github.com/nathco/jQuery.imgx
+// Author: Nathan Rutzky
+// Update: 1.0.2
 
 (function($) {
 

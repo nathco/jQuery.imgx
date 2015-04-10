@@ -8,7 +8,7 @@ Include the latest version of [jQuery](http://jquery.com/download) and `jQuery.i
 <script src="jQuery.imgx.js"></script>
 ```
 ## How to Use
-Reference the `imgx()` method and include `@2x, @3x, or @4x` image varients in the same directory as the original source. The script will automatically load the appropriate image(s) based on the display’s detected pixel density. See the live demo: [code.bynathan.com/imgx](http://code.bynathan.com/imgx)
+Reference the `imgx()` method and include `@2x, @3x, or @4x` image varients in the same directory as the original source. The script will automatically load the appropriate image(s) based on the display’s detected pixel density. See the live demo: [code.nath.co/imgx](http://code.nath.co/imgx)
 
 **jQuery**
 ```javascript
@@ -44,4 +44,4 @@ img {
 – Regex is now case-insensitive, thanks @azmenak       
 
 ## Feedback
-If you discover any issues or have questions regarding usage, please send a message to [mail@bynathan.com](mailto:mail@bynathan.com) or find me on twitter [@ByNathan](http://twitter.com/ByNathan).
+If you discover any issues or have questions regarding usage, please send a message to [code@nath.co](mailto:code@nath.co) or find me on GitHub [@nathco](https://github.com/nathco).
