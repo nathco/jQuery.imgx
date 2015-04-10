@@ -5,7 +5,25 @@
 
 (function($) {
 
-    $.fn.imgx = function() {
+    $.fn.imgx = function(options) {
+        
+        // settings object that can be overridden by options object on init
+        var settings = {
+            seperator: "@",
+            xFactors: [2,3,4]
+        };
+        
+        if (options) {
+            //if options is there try to override settings with options
+            for (var attrname in settings) {
+                if (options.hasOwnProperty(attrname)) {
+                    settings[attrname] = options[attrname];
+                }
+		    }
+        }
+        
+        var seperator = settings.seperator;
+        var xFactors = settings.xFactors;
         
         var dpi = function(density) {
         
@@ -15,36 +33,35 @@
                    '(screen and min-device-pixel-ratio: '+ density +')'+
                    '(screen and min-resolution: '+ density +'dppx)';
         };
-            
-        var x2 = function() {
-            
-            return 1 < window.devicePixelRatio ||
-                       window.matchMedia &&
-                       window.matchMedia(dpi(2)).matches ? !0 : !1;
-        }();
-            
-        var x3 = function() {
-                             
-            return 2 < window.devicePixelRatio ||
-                       window.matchMedia &&
-                       window.matchMedia(dpi(3)).matches ? !0 : !1;
-        }();
         
-        var x4 = function() {
-                             
-            return 3 < window.devicePixelRatio ||
+        function xTest(factor){
+            
+            return factor-1 < window.devicePixelRatio ||
                        window.matchMedia &&
-                       window.matchMedia(dpi(4)).matches ? !0 : !1;
-        }();
+                       window.matchMedia(dpi(factor)).matches ? !0 : !1;
+        }
+        
+        var xTests = { /* x2, x3, x4, ... */ };
+        
+        // cache results of xFactor window tests in the xTests object
+        for( var i = 0; i < xFactors.length-1; i++) {
+            const xFactor = xFactors[i];
+            xTests["x" + xFactor] = xTest(xFactor);
+        }
             
         return this.each(function() {
         
             var src;
-
-            if (x2) src = $(this).attr('src').replace(/\.(gif|jpg|jpeg|png|webp)$/i,'@2x.$1');
-            if (x3) src = $(this).attr('src').replace(/\.(gif|jpg|jpeg|png|webp)$/i,'@3x.$1');
-            if (x4) src = $(this).attr('src').replace(/\.(gif|jpg|jpeg|png|webp)$/i,'@4x.$1');
-                          $(this).attr('src', src);
+            
+            // loop through all xFactors. Ex. x2, x3, x4, ...
+            for( var i = 0; i < xFactors.length; i++) {
+                const xFactor = xFactors[i];
+                // if the cache of the xFactor test is true set src to appropriate string
+                if (xTests["x" + xFactor]) {
+                    src = $(this).attr('src').replace(/\.(gif|jpg|jpeg|png|webp)$/i, seperator + xFactor + 'x.$1');
+                }
+            }
+            $(this).attr('src', src);
         });      
     };
 
